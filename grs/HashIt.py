@@ -36,24 +36,9 @@ class HashIt():
         os.chdir(os.path.join(self.portage_configroot, '..'))
 
         # Note: this first cmd clobbers the contents
-        cmd = 'echo "# MD5 HASH"'
-        Execute(cmd, logfile=self.digest_name)
-        cmd = 'md5sum %s' % self.medium_name
-        Execute(cmd, timeout=60, logfile=self.digest_name)
-
-        cmd = 'echo "# SHA1 HASH"'
-        Execute(cmd, logfile=self.digest_name)
-        cmd = 'sha1sum %s' % self.medium_name
-        Execute(cmd, timeout=60, logfile=self.digest_name)
-
         cmd = 'echo "# SHA512 HASH"'
         Execute(cmd, logfile=self.digest_name)
         cmd = 'sha512sum %s' % self.medium_name
-        Execute(cmd, timeout=60, logfile=self.digest_name)
-
-        cmd = 'echo "# WHIRLPOOL HASH"'
-        Execute(cmd, logfile=self.digest_name)
-        cmd = 'whirlpooldeep %s' % self.medium_name
         Execute(cmd, timeout=60, logfile=self.digest_name)
 
         os.chdir(cwd)

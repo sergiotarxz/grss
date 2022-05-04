@@ -37,7 +37,7 @@ class TarIt(HashIt):
         year = str(datetime.now().year).zfill(4)
         month = str(datetime.now().month).zfill(2)
         day = str(datetime.now().day).zfill(2)
-        self.medium_name = '%s-%s%s%s.tar.xz' % (name, year, month, day)
+        self.medium_name = '%s-%s%s%s.tar.gz' % (name, year, month, day)
         self.digest_name = '%s.DIGESTS' % self.medium_name
 
 
@@ -52,6 +52,6 @@ class TarIt(HashIt):
         tarball_path = os.path.join('..', self.medium_name)
         # TODO: This needs to be generalized for systems that don't support xattrs
         xattr_opts = '--xattrs --xattrs-include=security.capability --xattrs-include=user.pax.flags'
-        cmd = 'tar %s -Jcf %s .' % (xattr_opts, tarball_path)
+        cmd = 'tar %s -zcf %s .' % (xattr_opts, tarball_path)
         Execute(cmd, timeout=None, logfile=self.logfile)
         os.chdir(cwd)
